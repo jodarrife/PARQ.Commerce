@@ -22,7 +22,7 @@ namespace Parking.Api.Controllers
         [HttpGet]
         public string Get()
         {
-            return "Running 3 2 1 ... ";
+            return "Running 3 2 1 ...  ";
         }
     }
 }
