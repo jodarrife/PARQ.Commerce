@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Identity.Domain
 {
     public class ApplicationUser : IdentityUser { 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string Nombre { get; set; }
+    public string Apellido { get; set; }
     public ICollection<ApplicationUserRole> UserRoles { get; set; }
     }
 }
