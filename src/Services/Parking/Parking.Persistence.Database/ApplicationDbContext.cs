@@ -13,7 +13,7 @@ namespace Parking.Persistence.Database
         {
 
         }
-        public DbSet<Parqueadero> Parqueaderos { get; set; }
+     
 
     }
 }
