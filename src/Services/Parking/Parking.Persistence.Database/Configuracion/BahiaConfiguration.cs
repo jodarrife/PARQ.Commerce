@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Parking.Domain;
+using Parking.Domain.Models;
 
 namespace Parking.Persistence.Database.Configuracion
 {

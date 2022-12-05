@@ -8,6 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Parking.Persistence.Database;
+using Parking.Service.Queries;
+using Parking.Service.Queries.IRepositories;
+using Parking.Service.Queries.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +30,22 @@ namespace Parking.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //base de datos
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                 Configuration.GetConnectionString("Conexion"),
                 //Tabla de migraciones
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory","Parking"))
             );
+
+
+            //Services
+            services.AddScoped<IParqueaderoService, ParqueaderoQueryService>();
+           
             services.AddControllers();
-            
+
+            //Repositorys
+        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

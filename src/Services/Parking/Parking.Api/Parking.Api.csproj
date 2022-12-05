@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Parking.Persistence.Database\Parking.Persistence.Database.csproj" />
+    <ProjectReference Include="..\Parking.Service.Queries\Parking.Service.Queries.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Parking.Domain
+namespace Parking.Domain.Models
 {
     public class Vehiculo
     {
