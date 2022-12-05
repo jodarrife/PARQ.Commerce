@@ -22,7 +22,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using AspNet.HealthChecks.UI.Client;
+using HealthChecks.UI.Client;
 
 namespace Parking.Api
 {
@@ -55,10 +55,10 @@ namespace Parking.Api
             //validar niestso servicios
             services.AddHealthChecks()
                       .AddCheck("self", () => HealthCheckResult.Healthy())
-                      .AddCheck("Customer.Api.Check", () => HealthCheckResult.Healthy())
                       .AddDbContextCheck<ApplicationDbContext>(typeof(ApplicationDbContext).Name);
 
             services.AddHealthChecksUI();
+
 
             services.AddControllers();
 
@@ -78,19 +78,17 @@ namespace Parking.Api
             app.UseRouting();
 
             app.UseAuthorization();
-            
+
 
             app.UseEndpoints(endpoints =>
             {
-                
+                endpoints.MapControllers();
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
-                   // ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
                 endpoints.MapHealthChecksUI();
-                endpoints.MapControllers();
             });
         }
        

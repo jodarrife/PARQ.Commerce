@@ -1,3 +1,4 @@
+
 using HealthChecks.UI.Client;
 using Identity.Domain;
 using Identity.Persistence.Database;
@@ -47,10 +48,10 @@ namespace Identity.Api
             //validar niestso servicios
             services.AddHealthChecks()
                       .AddCheck("self", () => HealthCheckResult.Healthy())
-                      .AddCheck("Customer.Api.Check", () => HealthCheckResult.Healthy())
                       .AddDbContextCheck<ApplicationDBContext>(typeof(ApplicationDBContext).Name); ;
 
             services.AddHealthChecksUI();
+ 
 
             // Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -70,6 +71,7 @@ namespace Identity.Api
 
             // Event handlers
             services.AddMediatR(Assembly.Load("Identity.Service.EventHandlers"));
+        
 
             // Query services
             services.AddTransient<IUserQueryService, UserQueryService>();
