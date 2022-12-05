@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using Parking.Domain;
+using Parking.Domain.Models;
 using Parking.Persistence.Database.Configuracion;
 
 namespace Parking.Persistence.Database

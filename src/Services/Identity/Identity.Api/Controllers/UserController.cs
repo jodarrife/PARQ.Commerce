@@ -1,10 +1,12 @@
 ﻿using Identity.Service.Queries;
 using Identity.Service.Queries.DTOs;
+using Identity.Service.Queries.IServices;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Service.Common.Collection;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,17 +1,16 @@
 ﻿using Identity.Persistence.Database;
 using Identity.Service.Queries.DTOs;
+using Identity.Service.Queries.IServices;
 using Microsoft.EntityFrameworkCore;
+using Service.Common.Collection;
+using Service.Common.Mapping;
+using Service.Common.Paging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Identity.Service.Queries
 {
-    public interface IUserQueryService
-    {
-        Task<DataCollection<UserDto>> GetAllAsync(int page, int take, IEnumerable<string> users = null);
-        Task<UserDto> GetAsync(string id);
-    }
 
     public class UserQueryService : IUserQueryService
     {

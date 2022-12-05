@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Parking.Service.Queries.DTOs;
 using System.Threading.Tasks;
-using Parking.Service.Queries.DTOs;
 
 namespace Parking.Service.Queries.IRepositories
 {

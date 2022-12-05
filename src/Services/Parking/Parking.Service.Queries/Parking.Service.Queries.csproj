@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Service.Common.Collection\Service.Common.Collection.csproj" />
+    <ProjectReference Include="..\..\Service.Common.Mapping\Service.Common.Mapping.csproj" />
+    <ProjectReference Include="..\..\Service.Common.Paging\Service.Common.Paging.csproj" />
     <ProjectReference Include="..\Parking.Persistence.Database\Parking.Persistence.Database.csproj" />
   </ItemGroup>
 

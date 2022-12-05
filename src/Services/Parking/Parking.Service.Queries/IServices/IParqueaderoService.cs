@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Parking.Service.Queries.DTOs;
+using Service.Common.Collection;
 
 namespace Parking.Service.Queries.IServices
 {
@@ -13,10 +14,10 @@ namespace Parking.Service.Queries.IServices
         Task CreateParqueadero(ParqueaderoDto parqueadero);
 
         //Consultar individual
-        Task GetParqueadero(ParqueaderoDto cuestionario);
+        Task<ParqueaderoDto> GetParqueadero(int id);
 
         //Consultar
-        Task GetAllParqueaderos();
+        Task<DataCollection<ParqueaderoDto>> GetAllParqueaderos(int page, int take, IEnumerable<int> parqueadero = null);
 
         //Eliminar
         Task DeleteParqueadero(ParqueaderoDto id);

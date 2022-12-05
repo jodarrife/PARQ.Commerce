@@ -2,10 +2,13 @@
 using Parking.Service.Queries.DTOs;
 using System;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using Parking.Service.Queries.IServices;
+using Service.Common.Collection;
+using Microsoft.EntityFrameworkCore;
+using Service.Common.Mapping;
+using Service.Common.Paging;
 
 namespace Parking.Service.Queries
 {
@@ -18,27 +21,32 @@ namespace Parking.Service.Queries
         }
 
 
-        public Task CreateParqueadero(ParqueaderoDto parqueadero)
+        public async Task CreateParqueadero(ParqueaderoDto parqueadero)
         {
             throw new NotImplementedException();
         }
 
-        public Task GetParqueadero(ParqueaderoDto cuestionario)
+        public async Task<ParqueaderoDto> GetParqueadero(int id)
+        {
+            return (await _context.Parqueadero.SingleAsync(x => x.Id == id)).MapTo<ParqueaderoDto>();
+        }
+
+        public async Task<DataCollection<ParqueaderoDto>> GetAllParqueaderos(int page, int take, IEnumerable<int> parqueadero = null)
+        {
+            var collection = await _context.Parqueadero
+                .Where(x => parqueadero == null || parqueadero.Contains(x.Id))
+                .OrderByDescending(x => x.Id)
+                .GetPagedAsync(page, take);
+            
+            return collection.MapTo<DataCollection<ParqueaderoDto>>();  
+        }
+
+        public async Task DeleteParqueadero(ParqueaderoDto id)
         {
             throw new NotImplementedException();
         }
 
-        public Task GetAllParqueaderos()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteParqueadero(ParqueaderoDto id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateParqueadero(ParqueaderoDto cuestionario)
+        public async Task UpdateParqueadero(ParqueaderoDto cuestionario)
         {
             throw new NotImplementedException();
         }

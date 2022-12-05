@@ -1,6 +1,7 @@
 using Identity.Domain;
 using Identity.Persistence.Database;
 using Identity.Service.Queries;
+using Identity.Service.Queries.IServices;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -42,9 +43,9 @@ namespace Identity.Api
             );
 
             // Health check
-            services.AddHealthChecks()
-                        .AddCheck("self", () => HealthCheckResult.Healthy())
-                        .AddDbContextCheck<ApplicationDBContext>(typeof(ApplicationDBContext).Name);
+            //services.AddHealthChecks()
+              //          .AddCheck("self", () => HealthCheckResult.Healthy())
+                //        .AddDbContextCheck<ApplicationDBContext>(typeof(ApplicationDBContext).Name);
 
             services.AddHealthChecks();
 
