@@ -1,3 +1,4 @@
+using HealthChecks.UI.Client;
 using Identity.Domain;
 using Identity.Persistence.Database;
 using Identity.Service.Queries;
@@ -5,6 +6,7 @@ using Identity.Service.Queries.IServices;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -42,12 +44,13 @@ namespace Identity.Api
                 )
             );
 
-            // Health check
-            //services.AddHealthChecks()
-              //          .AddCheck("self", () => HealthCheckResult.Healthy())
-                //        .AddDbContextCheck<ApplicationDBContext>(typeof(ApplicationDBContext).Name);
+            //validar niestso servicios
+            services.AddHealthChecks()
+                      .AddCheck("self", () => HealthCheckResult.Healthy())
+                      .AddCheck("Customer.Api.Check", () => HealthCheckResult.Healthy())
+                      .AddDbContextCheck<ApplicationDBContext>(typeof(ApplicationDBContext).Name); ;
 
-            services.AddHealthChecks();
+            services.AddHealthChecksUI();
 
             // Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>()
@@ -99,18 +102,24 @@ namespace Identity.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Identity.Api v1"));
-            }
 
+            }
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
+                endpoints.MapHealthChecksUI();
             });
         }
+
     }
 }

@@ -12,9 +12,17 @@ using Parking.Service.Queries;
 using Parking.Service.Queries.IRepositories;
 using Parking.Service.Queries.IServices;
 using System;
+using MediatR;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using AspNet.HealthChecks.UI.Client;
 
 namespace Parking.Api
 {
@@ -39,8 +47,19 @@ namespace Parking.Api
 
 
             //Services
-            services.AddScoped<IParqueaderoService, ParqueaderoQueryService>();
+            services.AddMediatR(Assembly.Load("Parking.Service.EventHandlers"));
+
            
+            services.AddScoped<IParqueaderoService, ParqueaderoQueryService>();
+
+            //validar niestso servicios
+            services.AddHealthChecks()
+                      .AddCheck("self", () => HealthCheckResult.Healthy())
+                      .AddCheck("Customer.Api.Check", () => HealthCheckResult.Healthy())
+                      .AddDbContextCheck<ApplicationDbContext>(typeof(ApplicationDbContext).Name);
+
+            services.AddHealthChecksUI();
+
             services.AddControllers();
 
             //Repositorys
@@ -56,15 +75,24 @@ namespace Parking.Api
                 app.UseDeveloperExceptionPage();
                 
             }
-
             app.UseRouting();
 
             app.UseAuthorization();
+            
 
             app.UseEndpoints(endpoints =>
             {
+                
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                   // ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+
+                });
+                endpoints.MapHealthChecksUI();
                 endpoints.MapControllers();
             });
         }
+       
     }
 }

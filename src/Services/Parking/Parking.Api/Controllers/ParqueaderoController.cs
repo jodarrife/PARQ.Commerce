@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Parking.Service.EventHandlers.Commands;
 using Parking.Service.Queries.DTOs;
 using Parking.Service.Queries.IServices;
 using Service.Common.Collection;
@@ -16,6 +18,7 @@ namespace Parking.Api.Controllers
     {
         private readonly IParqueaderoService _parqueaderoService;
         private readonly ILogger<ParqueaderoController> _logger;
+        private readonly IMediator _mediator;
 
         public ParqueaderoController(
             ILogger<ParqueaderoController> logger,
@@ -38,7 +41,6 @@ namespace Parking.Api.Controllers
             return await _parqueaderoService.GetAllParqueaderos(page, take, parqueadero);
         }
 
-  
 
         // parqueadero/id
         [HttpGet("{id}")]
@@ -46,5 +48,16 @@ namespace Parking.Api.Controllers
         {
             return await _parqueaderoService.GetParqueadero(id);
         }
+
+
+        // create
+        [HttpPost]
+        public async Task<IActionResult> Create(ParqueaderoCreateCommand command)
+        {
+            await _mediator.Publish(command);
+            return Ok();
+            
+        }
     }
 }
+

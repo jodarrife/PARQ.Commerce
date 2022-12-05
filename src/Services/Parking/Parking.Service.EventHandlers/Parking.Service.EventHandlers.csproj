@@ -8,13 +8,12 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="5.0.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.17" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Service.Common.Collection\Service.Common.Collection.csproj" />
+    <ProjectReference Include="..\Parking.Persistence.Database\Parking.Persistence.Database.csproj" />
   </ItemGroup>
 
 </Project>
