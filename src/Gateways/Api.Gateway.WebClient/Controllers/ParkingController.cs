@@ -1,5 +1,5 @@
 ﻿using Api.Gateway.Models;
-using Api.Gateway.Models.Catalog.DTOs;
+using Api.Gateway.Models.Parking.DTOs;
 using Api.Gateway.Proxies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -10,12 +10,12 @@ namespace Api.Gateway.WebClient.Controllers
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
-    [Route("products")]
-    public class ProductController : ControllerBase
+    [Route("parqueadero")]
+    public class ParkingController : ControllerBase
     {
         private readonly ICatalogProxy _catalogProxy;
 
-        public ProductController(
+        public ParkingController(
             ICatalogProxy catalogProxy
         ) 
         {

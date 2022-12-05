@@ -1,4 +1,4 @@
-﻿using Api.Gateway.Models.Catalog.DTOs;
+﻿using Api.Gateway.Models.Parking.DTOs;
 using Api.Gateway.Models.Customer.DTOs;
 using System;
 using System.Collections.Generic;
